@@ -11,6 +11,7 @@ public class GbApiProperties {
 
     private Connection connection;
     private Endpoint endpoint;
+    private JmsQuery jmsQuery;
 
     @Setter
     @Getter
@@ -29,4 +30,12 @@ public class GbApiProperties {
         private String categoryUrl;
         private String productUrl;
     }
+
+    @Getter
+    @Setter
+    public static class JmsQuery {
+        private String orderQuery;
+    }
+
+
 }
