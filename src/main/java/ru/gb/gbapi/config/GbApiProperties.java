@@ -29,5 +29,7 @@ public class GbApiProperties {
         private String categoryUrl;
         private String productUrl;
         private String orderUrl;
+        private String userUrl;
+        private String authUrl;
     }
 }

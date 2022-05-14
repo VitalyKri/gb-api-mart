@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  ru.gb.gbapi.config.FeignConfig
+  ru.gb.gbapi.config.add.FeignConfig
