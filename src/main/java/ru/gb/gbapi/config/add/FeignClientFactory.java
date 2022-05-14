@@ -1,4 +1,4 @@
-package ru.gb.gbapi.config;
+package ru.gb.gbapi.config.add;
 
 import feign.*;
 import feign.codec.ErrorDecoder;
@@ -11,9 +11,8 @@ import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
 import org.springframework.cloud.openfeign.support.SpringDecoder;
 import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.cloud.openfeign.support.SpringMvcContract;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import ru.gb.gbapi.manufacturer.api.ManufacturerGateway;
+import ru.gb.gbapi.config.GbApiProperties;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,11 +26,13 @@ public class FeignClientFactory {
     private final ObjectFactory<HttpMessageConverters> messageConverters;
 
 
-    public <T> T newFeignClient(Class<T> requiredType, String url) {
+
+    public <T> T newFeignClient(Class<T> requiredType, String url,RequestInterceptor requestInterceptor) {
         return Feign.builder()
                 .encoder(new SpringEncoder(this.messageConverters))
                 .decoder(new OptionalDecoder(new ResponseEntityDecoder(new SpringDecoder(this.messageConverters))))
                 .errorDecoder(errorDecoder())
+                .requestInterceptor(requestInterceptor)
                 .options(new Request.Options(
                         gbApiProperties.getConnection().getConnectTimeout(),
                         TimeUnit.SECONDS,
